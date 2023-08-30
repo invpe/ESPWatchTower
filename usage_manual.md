@@ -102,6 +102,9 @@ Use the Commands table to perform these operations.
 | UNTRUST | MAC | Mark device with MAC as untrusted |
 | ALLTRUST |  | Mark all devices as trusted |
 | SETNAME | MAC NAME | Set NAME of a device with MAC |
+| SETWIFI | WIFI_NAME | Set WIFI Name to connect to |
+| SETPASS | WIIF_PASSWORD | Set WIFI Password |
+
 
 
 # 🚢 Operating WatchTower
