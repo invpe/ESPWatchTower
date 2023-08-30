@@ -135,8 +135,9 @@ This is just basic, there are way more things you might want to consider to play
 - Check if the suspected device is connecting anywhere else too - you can use tools available online for that
   
  
+# 🎇 Ideas ?
 
-
+Feel free to share !
 
 
 
