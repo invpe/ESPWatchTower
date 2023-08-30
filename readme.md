@@ -42,12 +42,12 @@ When you get 🔴 and it's not a device that you know - definitely change your W
 Use [https://www.avast.com/random-password-generator#pc](https://www.avast.com/random-password-generator#pc) to help you pick one that is safe.
 
 
-# 📱 📱 False positives
+# 📱 False positives
 
 ## MAC Address Randomization
 Some devices have a mechanism called "MAC address randomization".
-Ensure to disable it in your mobile phones, tablets when using WatchTower for your WiFi network as this function randomizes MAC addresses of your devices,
-so that whenever you connect, you will use a different address which by WatchTower will be marked untrusted.
+Ensure to disable it in your mobile phones, tablets or other devices when using WatchTower for your WiFi network as this function randomizes MAC addresses of your devices,
+so that whenever they connect, they will use a different address which by WatchTower will be marked untrusted.
 
 Here is how to do this 
 - IOS [https://www.linksys.com/support-article?articleNum=317709](https://www.linksys.com/support-article?articleNum=317709) 
