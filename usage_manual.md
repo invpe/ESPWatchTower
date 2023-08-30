@@ -104,6 +104,38 @@ Use the Commands table to perform these operations.
 | SETNAME | MAC NAME | Set NAME of a device with MAC |
 
 
+# 🚢 Operating WatchTower
+
+Once you have added/updated and marked your devices as trusted, this data will be saved in the WatchTower device.
+If a device that is untrusted (unknown) is sending data through your AP, WatchTower will go 🛑 to notify you.
+It simply checks if a devices is on your list marked as `trusted` if not, it goes red-red-red.
+
+Once this happens:
+
+- Definitely revisit your `LIST` and check the device marked as untrusted
+- See if this is a device that you know but forgot to flag `trusted` if so, update it.
+- If you don't know this device a 🛑 red alert should now pop above your head
+  * Check the RSSI, does it ring a bell ? (low RSSI might mean signal is coming from far away), compare it to the other trusted signals
+  * Check [OUI](https://www.wireshark.org/tools/oui-lookup.html) tool to see if you know if you have a vendor that is assigned to this MAC
+  * Note it down, you can check against it later
+  * If you really don't recognize it, maybe it is the time to update your WIFI password!
+  * When decided to change password, update WatchTower first then your WiFi AP/router  
+  * When you change it, wait to see if the device comes back - if it was an intruder, it shouldnt appear anymore. If that's the case, good job ! You found someone is using your internet!
+    
+
+This is just basic, there are way more things you might want to consider to play it even better, some of them are:
+
+- Deploy few instances to check for suspicious connections covering larger area of your house
+- Maybe you spot it happening only from a room upstairs, that would be good clue.
+- Monitor RSSI of the devices vs 🛑 red ones, do you see any pattern ?
+- Mark down the `LastSeen` and check if it comes during grey hours like early in the morning, or when your out of home
+- Check if the suspected device is connecting anywhere else too - you can use tools available online for that
+  
+ 
+
+
+
+
 
 
 
