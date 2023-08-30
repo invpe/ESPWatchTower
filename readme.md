@@ -55,6 +55,9 @@ Here is how to do this
 
 # 🚶‍♂️ Next steps if you're still interested.
 
+- [Install](https://github.com/invpe/ESPWatchTower/blob/main/install_manual.md)
+- [Use](https://github.com/invpe/ESPWatchTower/blob/main/usage_manual.md)
+- Have fun ! 🙂
 
 # 🗃️ License
 ```
