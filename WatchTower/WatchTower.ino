@@ -1,8 +1,30 @@
 /*
- * ESP32 WatchTower an ESP32 Wireless Intrusion Detection eXperiment
- * https://github.com/invpe/ESPWatchTower
- * (c) invpe 2k23 
- */
+   ESP32 WatchTower an ESP32 Wireless Intrusion Detection eXperiment
+   https://github.com/invpe/ESPWatchTower
+   (c) invpe 2k23
+
+   MIT License
+
+  Copyright (c) 2023 invpe
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+*/
 #include <WiFi.h>
 #include <WebServer.h>
 #include <ArduinoOTA.h>
@@ -165,7 +187,7 @@ void PassiveScan(void* buf, wifi_promiscuous_pkt_type_t type)
     String strBSSID       = String(cBSSID);
 
     // Through AP
-    if (strDestination == strAccessPointMAC )
+    if (strBSSID == strAccessPointMAC )
     {
       uiCountOfFrames++;
       // Unknown, add
@@ -496,7 +518,13 @@ void ProcessCommand(const String& rstrCommand)
     std::vector<String> vArguments = TokenizeString(rstrCommand, ' ');
     if (vArguments.size() == 3) {
       if ( mDevices.find(vArguments[1]) == mDevices.end() )
+      {
         TelnetClient.println("Added device "ANSI_WHITE + vArguments[1] + ANSI_RESET " as "ANSI_WHITE"trusted"ANSI_RESET" with name " + ANSI_WHITE + vArguments[2] + ANSI_RESET);
+        tDevice _new;
+        _new.m_strName = vArguments[2];
+        _new.m_bTrusted = true;
+        mDevices[vArguments[1]] = _new;
+      }
       else
         TelnetClient.println("Device already exists");
     }
@@ -531,6 +559,27 @@ void ProcessCommand(const String& rstrCommand)
       }
     }
   }
+  // SETWIFI name
+  else if (rstrCommand.startsWith("SETWIFI"))
+  {
+    std::vector<String> vArguments = TokenizeString(rstrCommand, ' ');
+    if (vArguments.size() == 2) {
+      TelnetClient.println("Changed WiFi from"ANSI_RED" " + strWiFiA + ANSI_RESET + " to "ANSI_WHITE + vArguments[1] + ANSI_RESET);
+      TelnetClient.println(ANSI_YELLOW"Dont forget"ANSI_RESET" to save and update password if necessary!");
+      strWiFiA = vArguments[1];
+    }
+  }
+  // SETPASS pass
+  else if (rstrCommand.startsWith("SETPASS"))
+  {
+    std::vector<String> vArguments = TokenizeString(rstrCommand, ' ');
+    if (vArguments.size() == 2) {
+      TelnetClient.println("Changed WiFi password from "ANSI_RED" " + strWiFiP + ANSI_RESET + " to "ANSI_WHITE + vArguments[1] + ANSI_RESET);
+      TelnetClient.println("Save and reboot now!");
+      strWiFiP = vArguments[1];
+    }
+  }
+
   // TRUST mac
   else if (rstrCommand.startsWith("TRUST"))
   {
