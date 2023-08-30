@@ -113,15 +113,16 @@ Once you have added/updated and marked your devices as trusted, this data will b
 If a device that is untrusted (unknown) is sending data through your AP, WatchTower will go 🛑 to notify you.
 It simply checks if a devices is on your list marked as `trusted` if not, it goes red-red-red.
 
-Once this happens:
+# Once 🔴 happens:
 
 - Definitely revisit your `LIST` and check the device marked as untrusted
 - See if this is a device that you know but forgot to flag `trusted` if so, update it.
-- If you don't know this device a 🛑 red alert should now pop above your head
+- If you don't know this device a 🔴 red alert should now pop above your head
   * Check the RSSI, does it ring a bell ? (low RSSI might mean signal is coming from far away), compare it to the other trusted signals
   * Check [OUI](https://www.wireshark.org/tools/oui-lookup.html) tool to see if you know if you have a vendor that is assigned to this MAC
   * Note it down, you can check against it later
-  * If you really don't recognize it, maybe it is the time to update your WIFI password!
+  * If you really don't recognize it, maybe it is the time to update your WIFI password - Use [https://www.avast.com/random-password-generator#pc](https://www.avast.com/random-password-generator#pc) to help you pick one that is safe.
+
   * When decided to change password, update WatchTower first then your WiFi AP/router  
   * When you change it, wait to see if the device comes back - if it was an intruder, it shouldnt appear anymore. If that's the case, good job ! You found someone is using your internet!
     
@@ -130,11 +131,24 @@ This is just basic, there are way more things you might want to consider to play
 
 - Deploy few instances to check for suspicious connections covering larger area of your house
 - Maybe you spot it happening only from a room upstairs, that would be good clue.
-- Monitor RSSI of the devices vs 🛑 red ones, do you see any pattern ?
+- Monitor RSSI of the devices vs 🔴 red ones, do you see any pattern ?
 - Mark down the `LastSeen` and check if it comes during grey hours like early in the morning, or when your out of home
 - Check if the suspected device is connecting anywhere else too - you can use tools available online for that
   
+
  
+# 📱 False positives
+
+## MAC Address Randomization
+Some devices have a mechanism called "MAC address randomization".
+Ensure to disable it in your mobile phones, tablets or other devices when using WatchTower for your WiFi network as this function randomizes MAC addresses of your devices,
+so that whenever they connect, they will use a different address which by WatchTower will be marked untrusted.
+
+Here is how to do this 
+- IOS [https://www.linksys.com/support-article?articleNum=317709](https://www.linksys.com/support-article?articleNum=317709) 
+- ANDROID [https://www.linksys.com/support-article?articleNum=317710](https://www.linksys.com/support-article?articleNum=317710)
+
+
 # 🎇 Ideas ?
 
 Feel free to share !
