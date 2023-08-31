@@ -419,6 +419,7 @@ void LoadDevices()
   }
   while (configFile.available()) {
     String line = configFile.readStringUntil('\n');
+    Serial.println(line);
     std::vector<String> vArguments = TokenizeString(line, ',');
     tDevice _new;
     String strMac = vArguments[0];
@@ -537,10 +538,8 @@ void ProcessCommand(const String& rstrCommand)
       if ( mDevices.find(vArguments[1]) == mDevices.end() )
         TelnetClient.println("Can't find device with MAC of "ANSI_WHITE + vArguments[1] + ANSI_RESET);
       else
-      {
-        String strName = vArguments[2];
-        strName.substring(0, 7);
-        mDevices[vArguments[1]].m_strName = strName;
+      {    
+        mDevices[vArguments[1]].m_strName = vArguments[2];
         TelnetClient.println("Setting name of device "ANSI_WHITE + vArguments[1] + ANSI_RESET " to "ANSI_WHITE + vArguments[2] + ANSI_RESET);
       }
     }
