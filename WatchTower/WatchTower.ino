@@ -190,6 +190,7 @@ void PassiveScan(void* buf, wifi_promiscuous_pkt_type_t type)
     if (strBSSID == strAccessPointMAC )
     {
       uiCountOfFrames++;
+      
       // Unknown, add
       if ( mDevices.find(strSource) == mDevices.end() )
       {
@@ -538,7 +539,7 @@ void ProcessCommand(const String& rstrCommand)
       if ( mDevices.find(vArguments[1]) == mDevices.end() )
         TelnetClient.println("Can't find device with MAC of "ANSI_WHITE + vArguments[1] + ANSI_RESET);
       else
-      {    
+      {
         mDevices[vArguments[1]].m_strName = vArguments[2];
         TelnetClient.println("Setting name of device "ANSI_WHITE + vArguments[1] + ANSI_RESET " to "ANSI_WHITE + vArguments[2] + ANSI_RESET);
       }
@@ -622,10 +623,12 @@ void ProcessCommand(const String& rstrCommand)
 
 
       char timeFirstString[30];
-      strftime(timeFirstString, sizeof(timeFirstString), "%Y-%m-%d %H:%M:%S", gmtime(&device.m_tFirstSeen));
+      time_t adjustedTime = device.m_tFirstSeen + gmtOffset_sec;
+      strftime(timeFirstString, sizeof(timeFirstString), "%Y-%m-%d %H:%M:%S", gmtime(&adjustedTime));
 
       char timeLastString[30];
-      strftime(timeLastString, sizeof(timeLastString), "%Y-%m-%d %H:%M:%S", gmtime(&device.m_tLastSeen));
+      adjustedTime = device.m_tLastSeen + gmtOffset_sec;
+      strftime(timeLastString, sizeof(timeLastString), "%Y-%m-%d %H:%M:%S", gmtime(&adjustedTime));
 
       // Now check if was seen long ago (min 30m ago)
       TelnetClient.print(String(iCount) + "\t"); TelnetClient.print(ANSI_RESET);
